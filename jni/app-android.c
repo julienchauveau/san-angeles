@@ -45,7 +45,7 @@ _getTime(void)
 
 /* Call to initialize the graphics state */
 void
-Java_com_example_SanAngeles_DemoRenderer_nativeInit( JNIEnv*  env )
+Java_com_julienchauveau_SanAngeles_DemoRenderer_nativeInit( JNIEnv*  env )
 {
     importGLInit();
     appInit();
@@ -53,7 +53,7 @@ Java_com_example_SanAngeles_DemoRenderer_nativeInit( JNIEnv*  env )
 }
 
 void
-Java_com_example_SanAngeles_DemoRenderer_nativeResize( JNIEnv*  env, jobject  thiz, jint w, jint h )
+Java_com_julienchauveau_SanAngeles_DemoRenderer_nativeResize( JNIEnv*  env, jobject  thiz, jint w, jint h )
 {
     sWindowWidth  = w;
     sWindowHeight = h;
@@ -62,7 +62,7 @@ Java_com_example_SanAngeles_DemoRenderer_nativeResize( JNIEnv*  env, jobject  th
 
 /* Call to finalize the graphics state */
 void
-Java_com_example_SanAngeles_DemoRenderer_nativeDone( JNIEnv*  env )
+Java_com_julienchauveau_SanAngeles_DemoRenderer_nativeDone( JNIEnv*  env )
 {
     appDeinit();
     importGLDeinit();
@@ -90,7 +90,7 @@ void _resume()
 
 
 void
-Java_com_example_SanAngeles_DemoGLSurfaceView_nativeTogglePauseResume( JNIEnv*  env )
+Java_com_julienchauveau_SanAngeles_DemoGLSurfaceView_nativeTogglePauseResume( JNIEnv*  env )
 {
     sDemoStopped = !sDemoStopped;
     if (sDemoStopped)
@@ -100,20 +100,20 @@ Java_com_example_SanAngeles_DemoGLSurfaceView_nativeTogglePauseResume( JNIEnv*  
 }
 
 void
-Java_com_example_SanAngeles_DemoGLSurfaceView_nativePause( JNIEnv*  env )
+Java_com_julienchauveau_SanAngeles_DemoGLSurfaceView_nativePause( JNIEnv*  env )
 {
     _pause();
 }
 
 void
-Java_com_example_SanAngeles_DemoGLSurfaceView_nativeResume( JNIEnv*  env )
+Java_com_julienchauveau_SanAngeles_DemoGLSurfaceView_nativeResume( JNIEnv*  env )
 {
     _resume();
 }
 
 /* Call to render the next GL frame */
 void
-Java_com_example_SanAngeles_DemoRenderer_nativeRender( JNIEnv*  env )
+Java_com_julienchauveau_SanAngeles_DemoRenderer_nativeRender( JNIEnv*  env )
 {
     long   curTime;
 
