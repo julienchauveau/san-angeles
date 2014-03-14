@@ -49,6 +49,7 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 
 public class DemoActivity extends Activity {
     @Override
@@ -68,6 +69,20 @@ public class DemoActivity extends Activity {
     protected void onResume() {
         super.onResume();
         mGLView.onResume();
+        toggleUiVisibility();
+    }
+
+    public void toggleUiVisibility() {
+      int flags =
+          View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+          View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+          View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+          View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+          View.SYSTEM_UI_FLAG_FULLSCREEN |
+          View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+      int vis = getWindow().getDecorView().getSystemUiVisibility();
+
+      getWindow().getDecorView().setSystemUiVisibility(vis^flags);
     }
 
     private GLSurfaceView mGLView;
@@ -81,12 +96,14 @@ class DemoGLSurfaceView extends GLSurfaceView {
     public DemoGLSurfaceView(Context context) {
         super(context);
         mRenderer = new DemoRenderer();
+        mActivity = (DemoActivity) context;
         setRenderer(mRenderer);
     }
 
     public boolean onTouchEvent(final MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             nativeTogglePauseResume();
+            mActivity.toggleUiVisibility();
         }
         return true;
     }
@@ -103,7 +120,7 @@ class DemoGLSurfaceView extends GLSurfaceView {
         nativeResume();
     }
 
-
+    DemoActivity mActivity;
     DemoRenderer mRenderer;
 
     private static native void nativePause();

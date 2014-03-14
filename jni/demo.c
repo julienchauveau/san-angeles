@@ -760,11 +760,11 @@ void appRender(long tick, int width, int height)
     // Actual tick value is "blurred" a little bit.
     sTick = (sTick + tick - sStartTick) >> 1;
 
-    // Terminate application after running through the demonstration once.
+    // Restart application after running through the demonstration once.
     if (sTick >= RUN_LENGTH)
     {
-        gAppAlive = 0;
-        return;
+        sTick = 0;
+        sStartTick = tick;
     }
 
     // Prepare OpenGL ES for rendering of the frame.
